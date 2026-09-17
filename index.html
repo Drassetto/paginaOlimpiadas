@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olimpíadas Científicas Argentinas</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <h1 class="site-title">Olimpíadas Argentinas</h1>
+
+      <!-- Redes sociales + botón hamburguesa (el botón solo se ve en celular) -->
+      <div class="social-bar">
+        <a href="https://www.instagram.com/poli_schumi?igsh=ZTZoOGh6bXF2NDJv" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:text-pink-300 transition">
+          <i class="fa-brands fa-instagram text-2xl"></i>
+        </a>
+        <a href="https://twitch.tv/poli_schumi" target="_blank" rel="noopener noreferrer" title="Twitch" class="hover:text-purple-300 transition">
+          <i class="fa-brands fa-twitch text-xl"></i>
+        </a>
+        <a href="https://www.youtube.com/@AlejandroSchujman" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:text-red-400 transition">
+          <i class="fa-brands fa-youtube text-2xl"></i>
+        </a>
+
+        <button id="menu-btn" type="button" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+          <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+
+      <nav id="nav-menu" class="nav-menu hidden md:flex">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#quienes-somos" class="nav-link">Quiénes somos</a>
+        <a href="#olimpiadas" class="nav-link">Olimpíadas</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         INICIO
+         ============================================================ -->
+    <section id="inicio" class="section-pad min-h-[70vh] text-center flex flex-col justify-center items-center bg-linear-to-b from-red-50 to-gray-50">
+      <h2 class="text-4xl md:text-6xl font-bold text-red-800 mb-4 tracking-tight">Descubrí las Olimpiadas!!</h2>
+      <p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+        Formá parte de la comunidad de estudiantes más apasionada de la Argentina. Potenciá tu conocimiento, resolvé problemas complejos y representá al país en el mundo.
+      </p>
+      <a href="#olimpiadas" class="btn mt-8 px-6 py-3 shadow-md">
+        Ver olimpíadas disponibles
+      </a>
+    </section>
+
+    <!-- ============================================================
+         QUIÉNES SOMOS
+         ============================================================ -->
+    <section id="quienes-somos" class="section-pad min-h-[50vh] bg-white text-center">
+      <h2 class="section-title mb-6">Quiénes somos</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed text-lg text-justify sm:text-center">
+        Somos una red abierta de apoyo para estudiantes del Politécnico apasionados de las ciencias exactas y naturales en Argentina. Nuestro objetivo es centralizar la información, compartir recursos de preparación pedagógica y motivar a las próximas generaciones de científicos a dar sus primeros pasos en los certámenes nacionales e internacionales más prestigiosos.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         OLIMPÍADAS
+         ============================================================ -->
+    <section id="olimpiadas" class="section-pad min-h-screen bg-gray-50">
+      <h2 class="section-title mb-10 text-center">Olimpíadas Científicas Nacionales</h2>
+
+      <div class="carousel">
+
+        <button id="prev-btn" type="button" class="carousel-arrow left-2 lg:left-0" aria-label="Anterior">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="next-btn" type="button" class="carousel-arrow right-2 lg:right-0" aria-label="Siguiente">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div id="cards-wrap" class="cards-wrap" tabindex="0" role="region" aria-label="Olimpíadas">
+
+        <!-- Las tarjetas se generan desde js/data.js (ver js/cards.js) -->
+
+        </div><!-- /cards-wrap -->
+      </div><!-- /carousel -->
+    </section>
+
+    <!-- ============================================================
+         CONTACTO
+         ============================================================ -->
+    <section id="contacto" class="section-pad min-h-screen bg-white text-center">
+      <h2 class="section-title mb-2">¿Querés prepararte con nosotros?</h2>
+      <p class="text-gray-600 mb-8 max-w-lg mx-auto">Completá el formulario con tus datos para recibir material de estudio exclusivo o coordinar asesorías pedagógicas.</p>
+
+      <form class="space-y-4 max-w-md mx-auto text-left bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100">
+
+        <div>
+          <label for="nombre" class="field-label">Nombre y apellido</label>
+          <input id="nombre" name="Nombre" type="text" placeholder="Ej: Juan Pérez" class="field-input" required>
+        </div>
+
+        <div>
+          <label for="email" class="field-label">Email de contacto</label>
+          <input id="email" name="Email" type="email" placeholder="juan@ejemplo.com" class="field-input" required>
+        </div>
+
+        <div>
+          <label for="tel" class="field-label">Teléfono móvil</label>
+          <input id="tel" name="Telefono" type="tel" placeholder="+54 9..." class="field-input">
+        </div>
+
+        <div>
+          <label for="fecha" class="field-label">Fecha de nacimiento</label>
+          <input id="fecha" name="Fecha_de_Nacimiento" type="date" class="field-input">
+        </div>
+
+        <div>
+          <label for="gen" class="field-label">Género</label>
+          <select id="gen" name="Genero" class="field-input bg-white">
+            <option value="Pref. no decirlo" selected>Prefiero no decirlo</option>
+            <option value="Masc">Masculino</option>
+            <option value="Fem">Femenino</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="com" class="field-label">¿Para qué olimpíada te preparás o cuál es tu consulta?</label>
+          <textarea id="com" name="Comentario" placeholder="Contanos brevemente tu experiencia o qué material estás buscando..." class="field-input h-24"></textarea>
+        </div>
+
+        <div>
+          <label for="cv" class="field-label text-sm">Adjuntar certificado escolar o CV (Opcional - .pdf)</label>
+          <input id="cv" name="CV" type="file" class="border border-gray-300 rounded-lg p-2 w-full bg-white text-sm" accept=".pdf">
+        </div>
+
+        <div class="text-center mt-8">
+          <a href="mailto:diegorassetto0204@gmail.com?subject=Contacto%20red%20Ol%C3%ADmpica" class="btn inline-block px-8 py-3 hover:shadow-lg duration-300">
+            Enviar por mail
+          </a>
+          <p class="text-xs text-gray-400 mt-3">* Al hacer clic, se abrirá tu gestor de correo predeterminado.</p>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+
+<!-- data.js define los datos, cards.js dibuja las tarjetas.
+     Ambos deben ir ANTES de carousel.js. -->
+<script src="js/data.js"></script>
+<script src="js/cards.js"></script>
+
+<script src="js/menu.js"></script>
+<script src="js/anillo.js"></script>
+</body>
+</html>

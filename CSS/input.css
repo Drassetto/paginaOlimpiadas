@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer components {
+
+      /* ---- Header / navegación ---- */
+      .site-header  { @apply sticky top-0 z-50 bg-red-900 text-white shadow-md; }
+      .header-inner { @apply max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-y-2 px-4 sm:px-6 py-3; }
+      .site-title   { @apply text-lg sm:text-2xl font-bold tracking-wider; }
+      .social-bar   { @apply flex items-center gap-4 order-2 md:order-3; }
+      .menu-btn     { @apply md:hidden -mr-1 p-1 hover:text-red-300 transition; }
+
+      /* Móvil: menú vertical desplegable a lo ancho. Desktop (md+): fila horizontal.
+         El mostrar/ocultar lo maneja "hidden md:flex" en el HTML + el toggle del botón. */
+      .nav-menu     { @apply flex w-full order-3 flex-col items-center gap-y-3 pt-3 mt-2 border-t border-red-800
+                             font-semibold text-sm sm:text-base
+                             md:w-auto md:order-2 md:flex-row md:flex-wrap md:justify-center
+                             md:gap-x-6 md:gap-y-1 md:pt-0 md:mt-0 md:border-0; }
+      .nav-link     { @apply hover:text-red-300 transition; }
+
+      /* ---- Secciones ---- */
+      .section-pad   { @apply p-8 pt-24; }
+      .section-title { @apply text-3xl font-bold text-red-800; }
+
+      /* ---- Carrusel (anillo) ----
+         Todas las tarjetas viven en la MISMA celda de la grilla, una
+         encima de la otra, y el JS las corre a los costados con
+         transform. Ventajas: el contenedor mide lo que mide la tarjeta
+         más alta, y no hay scroll nativo al que pelearle. */
+      .carousel      { @apply relative -mx-8 md:mx-auto md:max-w-6xl overflow-visible py-10; }
+      .cards-wrap    { @apply grid justify-items-center items-stretch cursor-grab; }
+      .carousel-arrow{ @apply hidden md:flex absolute top-1/2 -translate-y-1/2 z-20
+                              items-center justify-center w-12 h-12 rounded-full
+                              bg-white text-red-800 text-xl shadow-lg border border-gray-100
+                              hover:bg-red-800 hover:text-white transition-colors; }
+
+      /* ---- Tarjeta de olimpíada ----
+         Proporciones libres: la altura la manda el contenido (todas
+         igualan a la más alta). El tamaño/gris/opacidad los pone el JS. */
+      .card         { @apply bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 sm:p-8 flex flex-col
+                             w-[86vw] md:w-[62%] xl:w-[56%]; }
+      .card-head    { @apply text-center font-bold mb-6; }
+      .card-acronym { @apply text-xl tracking-widest uppercase text-red-700; }
+      .card-name    { @apply text-2xl mt-1 font-sans; }
+      .card-body    { @apply flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6; }
+      .card-logo    { @apply w-32 h-32 shrink-0 mx-auto sm:mx-0; }
+      .card-logo img{ @apply w-full h-full object-contain p-2 rounded-full shadow-inner border border-gray-100; }
+      .card-text    { @apply flex-1 text-sm text-gray-600 space-y-4; }
+      .card-desc    { @apply text-justify leading-relaxed; }
+      .card-awards  { @apply pt-3 border-t border-gray-100; }
+      .awards-label { @apply block font-semibold text-red-800 mb-1.5; }
+      .badge-row    { @apply flex flex-wrap gap-1.5; }
+      .badge        { @apply bg-red-50 text-red-700 px-2.5 py-1 rounded-md text-xs font-medium border border-red-100; }
+      .card-footer  { @apply flex justify-between items-end text-sm font-semibold mt-auto pt-4 border-t border-gray-100; }
+      .card-org     { @apply text-gray-800; }
+      .card-org-sub { @apply text-gray-400 font-normal text-xs; }
+      .card-links   { @apply flex items-center gap-3 text-gray-700; }
+      .link-web     { @apply hover:text-red-600 transition; }
+      .link-ig      { @apply hover:text-pink-600 transition; }
+
+      /* ---- Formulario de contacto ---- */
+      .field-label { @apply block font-bold text-red-800 mb-1; }
+      .field-input { @apply border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-red-500; }
+
+      /* ---- Botones ---- */
+      .btn { @apply bg-red-800 text-white rounded-xl font-bold cursor-pointer hover:bg-red-700 transition-all; }
+    }
+
+
+    #olimpiadas { overflow-x: clip; }
+    @supports not (overflow: clip) {           /* Safari anterior al 16 */
+      #olimpiadas { overflow-x: hidden; }
+    }
+
+    /* Todas las tarjetas apiladas en la misma celda: el contenedor mide lo
+       que la más alta, y todas quedan de la misma altura entre sí. */
+    .card { grid-area: 1 / 1; will-change: transform;
+            transition: transform .45s cubic-bezier(.22,.61,.36,1),
+                        filter    .45s ease-out,
+                        opacity   .45s ease-out; }
+
+    /* Deslizamiento vertical de la página: sí. Horizontal: lo maneja el JS. */
+    .cards-wrap { touch-action: pan-y; }
+
+    /* Mientras se arrastra, las tarjetas siguen al dedo sin retardo */
+    .cards-wrap.is-dragging { cursor: grabbing; user-select: none; }
+    .cards-wrap.is-dragging .card { transition: none; }
