@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olimpíadas Científicas Argentinas</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="./dist/styles.css">
+  <!-- Actividad 4: estilos del curso y del panel de administración -->
+  <link rel="stylesheet" href="./css/inscripcion.css">
+  <!-- Modo claro/oscuro: va en el head para que no haya "flash" al cargar -->
+  <script src="js/tema.js"></script>
+</head>
+
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <h1 class="site-title">Olimpíadas Argentinas</h1>
+
+      <!-- Redes sociales + botón hamburguesa (el botón solo se ve en celular) -->
+      <div class="social-bar">
+        <a href="https://www.instagram.com/poli_schumi?igsh=ZTZoOGh6bXF2NDJv" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:text-pink-300 transition">
+          <i class="fa-brands fa-instagram text-2xl"></i>
+        </a>
+        <a href="https://twitch.tv/poli_schumi" target="_blank" rel="noopener noreferrer" title="Twitch" class="hover:text-purple-300 transition">
+          <i class="fa-brands fa-twitch text-xl"></i>
+        </a>
+        <a href="https://www.youtube.com/@AlejandroSchujman" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:text-red-400 transition">
+          <i class="fa-brands fa-youtube text-2xl"></i>
+        </a>
+
+        <!-- Modo claro / oscuro (js/tema.js) -->
+        <button type="button" class="admin-access" data-tema-toggle title="Cambiar a modo oscuro" aria-label="Cambiar a modo oscuro">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+
+        <!-- Actividad 4: acceso al panel de administración -->
+        <button id="admin-btn" type="button" class="admin-access" title="Panel de administración" aria-label="Panel de administración">
+          <i class="fa-solid fa-user-lock" aria-hidden="true"></i>
+        </button>
+
+        <button id="menu-btn" type="button" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+          <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+
+      <nav id="nav-menu" class="nav-menu hidden md:flex">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#quienes-somos" class="nav-link">Quiénes somos</a>
+        <a href="#olimpiadas" class="nav-link">Olimpíadas</a>
+        <a href="#curso" class="nav-link">Curso 2027</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         INICIO
+         ============================================================ -->
+    <section id="inicio" class="section-pad min-h-[70vh] text-center flex flex-col justify-center items-center bg-linear-to-b from-red-50 to-gray-50">
+      <h2 class="text-4xl md:text-6xl font-bold text-red-800 mb-4 tracking-tight">Descubrí las Olimpiadas!!</h2>
+      <p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+        Formá parte de la comunidad de estudiantes más apasionada de la Argentina. Potenciá tu conocimiento, resolvé problemas complejos y representá al país en el mundo.
+      </p>
+      <a href="#olimpiadas" class="btn mt-8 px-6 py-3 shadow-md">
+        Ver olimpíadas disponibles
+      </a>
+    </section>
+
+    <!-- ============================================================
+         QUIÉNES SOMOS
+         ============================================================ -->
+    <section id="quienes-somos" class="section-pad min-h-[50vh] bg-white text-center">
+      <h2 class="section-title mb-6">Quiénes somos</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed text-lg text-justify sm:text-center">
+        Somos una red abierta de apoyo para estudiantes del Politécnico apasionados de las ciencias exactas y naturales en Argentina. Nuestro objetivo es centralizar la información, compartir recursos de preparación pedagógica y motivar a las próximas generaciones de científicos a dar sus primeros pasos en los certámenes nacionales e internacionales más prestigiosos.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         OLIMPÍADAS
+         ============================================================ -->
+    <section id="olimpiadas" class="section-pad min-h-screen bg-gray-50">
+      <h2 class="section-title mb-10 text-center">Olimpíadas Científicas Nacionales</h2>
+
+      <div class="carousel">
+
+        <button id="prev-btn" type="button" class="carousel-arrow left-2 lg:left-0" aria-label="Anterior">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="next-btn" type="button" class="carousel-arrow right-2 lg:right-0" aria-label="Siguiente">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div id="cards-wrap" class="cards-wrap" tabindex="0" role="region" aria-label="Olimpíadas">
+
+        <!-- Las tarjetas se generan desde js/data.js (ver js/cards.js) -->
+
+        </div><!-- /cards-wrap -->
+      </div><!-- /carousel -->
+    </section>
+
+    <!-- ============================================================
+         CURSO 2027 — inscripción (Actividad 4)
+         La lógica está en js/inscripcion.js y js/validaciones.js
+         ============================================================ -->
+    <section id="curso" class="section-pad curso">
+      <div class="curso-head">
+        <h2 class="section-title">Curso de preparación olímpica 2027</h2>
+        <p class="curso-lead">
+          Ocho semanas entrenando con problemas de certámenes anteriores, en grupos chicos y con docentes que pasaron por las olimpíadas. Llegá a la instancia escolar sabiendo qué te van a tomar.
+        </p>
+      </div>
+
+      <div class="curso-inner">
+
+        <aside class="curso-ficha" aria-labelledby="ficha-incluye">
+          <h3 id="ficha-incluye" class="ficha-titulo">Qué incluye</h3>
+          <ul class="ficha-lista">
+            <li><i class="fa-solid fa-calendar-days" aria-hidden="true"></i><span>8 semanas, de marzo a mayo, antes de la instancia escolar.</span></li>
+            <li><i class="fa-solid fa-school" aria-hidden="true"></i><span>Sábados de 9 a 12 en el Politécnico, con las clases grabadas para repasar.</span></li>
+            <li><i class="fa-solid fa-atom" aria-hidden="true"></i><span>Un grupo por área: Matemática, Informática, Física, Química y Biología.</span></li>
+            <li><i class="fa-solid fa-stopwatch" aria-hidden="true"></i><span>Simulacros con tiempo, como en el certamen, y corrección personalizada.</span></li>
+            <li><i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Cuadernillo con problemas resueltos de OMA, OIA, OAF, OAQ y OAB.</span></li>
+          </ul>
+
+          <div class="ficha-precio">
+            <span class="precio-label">Valor del curso completo</span>
+            <span class="precio-monto">$45.000</span>
+            <span class="precio-nota">Un solo pago. Cupo de 30 estudiantes por área.</span>
+          </div>
+
+          <h3 class="ficha-titulo">Cómo inscribirte</h3>
+          <ol class="ficha-pasos">
+            <li><span>Transferí el valor del curso al alias <strong class="alias">POLI.OLIMPIADAS</strong>.</span></li>
+            <li><span>Guardá el comprobante en PDF o JPG.</span></li>
+            <li><span>Completá el formulario y adjuntalo.</span></li>
+          </ol>
+        </aside>
+
+        <form id="form-inscripcion" class="form-card" novalidate>
+          <h3 class="form-titulo">Formulario de inscripción</h3>
+          <p class="form-intro">Todos los datos son obligatorios.</p>
+
+          <div class="form-grid">
+            <div class="campo">
+              <label for="insc-apellido" class="field-label">Apellido</label>
+              <input id="insc-apellido" name="apellido" type="text" class="field-input" placeholder="Ej: Pérez" autocomplete="family-name" maxlength="40" required aria-describedby="insc-apellido-error">
+              <p id="insc-apellido-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo">
+              <label for="insc-nombre" class="field-label">Nombre</label>
+              <input id="insc-nombre" name="nombre" type="text" class="field-input" placeholder="Ej: Juan" autocomplete="given-name" maxlength="40" required aria-describedby="insc-nombre-error">
+              <p id="insc-nombre-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo">
+              <label for="insc-documento" class="field-label">DNI</label>
+              <input id="insc-documento" name="documento" type="text" class="field-input" placeholder="Ej: 45123456" inputmode="numeric" maxlength="10" required aria-describedby="insc-documento-error">
+              <p id="insc-documento-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo">
+              <label for="insc-celular" class="field-label">Celular</label>
+              <input id="insc-celular" name="celular" type="tel" class="field-input" placeholder="Ej: 341 555 1234" autocomplete="tel" inputmode="tel" maxlength="20" required aria-describedby="insc-celular-ayuda insc-celular-error">
+              <p id="insc-celular-ayuda" class="campo-ayuda">Con característica, sin 0 ni 15.</p>
+              <p id="insc-celular-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo campo-full">
+              <label for="insc-email" class="field-label">Email</label>
+              <input id="insc-email" name="email" type="email" class="field-input" placeholder="juan@ejemplo.com" autocomplete="email" maxlength="80" required aria-describedby="insc-email-error">
+              <p id="insc-email-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo">
+              <label for="insc-empresa" class="field-label">Institución o empresa</label>
+              <input id="insc-empresa" name="empresa" type="text" class="field-input" placeholder="Ej: Politécnico San Martín" autocomplete="organization" maxlength="60" required aria-describedby="insc-empresa-error">
+              <p id="insc-empresa-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo">
+              <label for="insc-cargo" class="field-label">Cargo</label>
+              <input id="insc-cargo" name="cargo" type="text" class="field-input" placeholder="Ej: Estudiante de 4° año" autocomplete="organization-title" maxlength="60" required aria-describedby="insc-cargo-error">
+              <p id="insc-cargo-error" class="campo-error"></p>
+            </div>
+
+            <div class="campo campo-full">
+              <label for="insc-comprobante" class="field-label">Comprobante de pago</label>
+              <div id="archivo-zona" class="archivo">
+                <input id="insc-comprobante" name="comprobante" type="file" accept=".pdf,.jpg,.jpeg,application/pdf,image/jpeg" required aria-describedby="insc-archivo-texto insc-comprobante-error">
+                <i class="fa-solid fa-file-arrow-up archivo-icono" aria-hidden="true"></i>
+                <p id="insc-archivo-texto" class="archivo-texto">Elegí o arrastrá el archivo</p>
+                <p class="archivo-ayuda">PDF o JPG, hasta 5 MB</p>
+              </div>
+              <p id="insc-comprobante-error" class="campo-error"></p>
+            </div>
+          </div>
+
+          <div id="insc-estado" class="form-estado" role="status" aria-live="polite" hidden></div>
+
+          <button type="submit" class="btn btn-inscribir">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            <span>Inscribirme</span>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+
+
+  <!-- ============================================================
+                          INSCRIPCION
+       ============================================================ -->
+  <dialog id="login-dialog" class="dlg" aria-labelledby="login-titulo">
+    <form id="login-form" novalidate>
+      <div class="dlg-head">
+        <h3 id="login-titulo">Acceso administración</h3>
+        <button type="button" class="dlg-cerrar" data-cerrar aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="dlg-body">
+        <p class="dlg-texto">Ingresá con el nombre del grupo y la contraseña que usan para SSH y SCP.</p>
+        <div class="campo">
+          <label for="login-usuario" class="field-label">Nombre del grupo</label>
+          <input id="login-usuario" name="usuario" type="text" class="field-input" autocomplete="username" required>
+        </div>
+        <div class="campo">
+          <label for="login-clave" class="field-label">Contraseña</label>
+          <input id="login-clave" name="clave" type="password" class="field-input" autocomplete="current-password" required>
+        </div>
+        <p id="login-demo" class="dlg-demo" hidden></p>
+        <p id="login-error" class="campo-error" role="alert"></p>
+      </div>
+      <div class="dlg-foot">
+        <button type="button" class="btn-sec" data-cerrar>Cancelar</button>
+        <button type="submit" id="login-submit" class="btn btn-dlg">Ingresar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="admin-panel" class="admin" role="region" aria-labelledby="admin-titulo" hidden>
+
+    <div class="admin-bar">
+      <div class="admin-bar-inner">
+        <div>
+          <h2 id="admin-titulo" class="admin-titulo">Inscriptos al curso 2027</h2>
+          <p class="admin-sub">
+            <span><i class="fa-solid fa-user" aria-hidden="true"></i> <span id="admin-usuario"></span></span>
+            <span id="admin-actualizado"></span>
+          </p>
+        </div>
+        <div class="admin-acciones">
+          <button id="btn-actualizar" type="button" class="bar-btn" title="Volver a traer la lista del servidor">
+            <i class="fa-solid fa-rotate" aria-hidden="true"></i><span>Actualizar</span>
+          </button>
+          <!-- Mismo botón de tema que el header (el panel lo tapa) -->
+          <button type="button" class="bar-btn" data-tema-toggle title="Cambiar a modo oscuro" aria-label="Cambiar a modo oscuro">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          </button>
+          <button id="btn-volver" type="button" class="bar-btn" title="Volver al sitio sin cerrar sesión">
+            <i class="fa-solid fa-house" aria-hidden="true"></i><span>Ver sitio</span>
+          </button>
+          <button id="btn-salir" type="button" class="bar-btn">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+   
+      <div class="admin-toolbar">
+        <div class="filtro">
+          <label for="filtro-texto" class="field-label">Buscar</label>
+          <div class="filtro-input">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input id="filtro-texto" type="search" class="field-input" placeholder="Apellido, nombre, email, DNI…" autocomplete="off">
+          </div>
+        </div>
+        <div class="filtro-campo">
+          <label for="filtro-campo" class="field-label">Buscar en</label>
+          <select id="filtro-campo" class="field-input">
+            <option value="todos">Todos los datos</option>
+            <option value="apellido">Apellido</option>
+            <option value="nombre">Nombre</option>
+            <option value="documento">DNI</option>
+            <option value="email">Email</option>
+            <option value="celular">Celular</option>
+            <option value="empresa">Institución / empresa</option>
+            <option value="cargo">Cargo</option>
+          </select>
+        </div>
+        <div class="contadores" aria-live="polite">
+          <span class="contador">Total inscriptos <strong id="cont-total">0</strong></span>
+          <span id="cont-filtro-wrap" class="contador contador-filtro" hidden>En pantalla <strong id="cont-filtro">0</strong></span>
+        </div>
+      </div>
+
+      <p id="admin-aviso" class="admin-aviso" role="alert" hidden></p>
+
+      <div id="tabla-wrap" class="tabla-wrap" aria-busy="false">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th scope="col">Apellido</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">DNI</th>
+              <th scope="col">Email</th>
+              <th scope="col">Celular</th>
+              <th scope="col">Institución / empresa</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Comprobante</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-cuerpo"></tbody>
+        </table>
+        <div id="tabla-vacia" class="tabla-vacia"><p>Cargando inscriptos…</p></div>
+      </div>
+    </div>
+
+    <!-- Editar inscripto -->
+    <dialog id="editar-dialog" class="dlg dlg-ancho" aria-labelledby="editar-titulo">
+      <form id="editar-form" novalidate>
+        <div class="dlg-head">
+          <h3 id="editar-titulo">Editar inscripción</h3>
+          <button type="button" class="dlg-cerrar" data-cerrar aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="dlg-body form-grid">
+          <div class="campo">
+            <label for="ed-apellido" class="field-label">Apellido</label>
+            <input id="ed-apellido" name="apellido" type="text" class="field-input" maxlength="40" aria-describedby="ed-apellido-error">
+            <p id="ed-apellido-error" class="campo-error"></p>
+          </div>
+          <div class="campo">
+            <label for="ed-nombre" class="field-label">Nombre</label>
+            <input id="ed-nombre" name="nombre" type="text" class="field-input" maxlength="40" aria-describedby="ed-nombre-error">
+            <p id="ed-nombre-error" class="campo-error"></p>
+          </div>
+          <div class="campo">
+            <label for="ed-documento" class="field-label">DNI</label>
+            <input id="ed-documento" name="documento" type="text" class="field-input" inputmode="numeric" maxlength="10" aria-describedby="ed-documento-error">
+            <p id="ed-documento-error" class="campo-error"></p>
+          </div>
+          <div class="campo">
+            <label for="ed-celular" class="field-label">Celular</label>
+            <input id="ed-celular" name="celular" type="tel" class="field-input" inputmode="tel" maxlength="20" aria-describedby="ed-celular-error">
+            <p id="ed-celular-error" class="campo-error"></p>
+          </div>
+          <div class="campo campo-full">
+            <label for="ed-email" class="field-label">Email</label>
+            <input id="ed-email" name="email" type="email" class="field-input" maxlength="80" aria-describedby="ed-email-error">
+            <p id="ed-email-error" class="campo-error"></p>
+          </div>
+          <div class="campo">
+            <label for="ed-empresa" class="field-label">Institución o empresa</label>
+            <input id="ed-empresa" name="empresa" type="text" class="field-input" maxlength="60" aria-describedby="ed-empresa-error">
+            <p id="ed-empresa-error" class="campo-error"></p>
+          </div>
+          <div class="campo">
+            <label for="ed-cargo" class="field-label">Cargo</label>
+            <input id="ed-cargo" name="cargo" type="text" class="field-input" maxlength="60" aria-describedby="ed-cargo-error">
+            <p id="ed-cargo-error" class="campo-error"></p>
+          </div>
+        </div>
+        <p id="editar-error" class="campo-error dlg-error" role="alert"></p>
+        <div class="dlg-foot">
+          <button type="button" class="btn-sec" data-cerrar>Cancelar</button>
+          <button type="submit" id="editar-guardar" class="btn btn-dlg">Guardar cambios</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Confirmar eliminación -->
+    <dialog id="eliminar-dialog" class="dlg" aria-labelledby="eliminar-titulo">
+      <div class="dlg-head">
+        <h3 id="eliminar-titulo">Eliminar inscripción</h3>
+      </div>
+      <div class="dlg-body">
+        <p id="eliminar-texto" class="dlg-texto"></p>
+      </div>
+      <div class="dlg-foot">
+        <button type="button" class="btn-sec" data-cerrar autofocus>Cancelar</button>
+        <button type="button" id="eliminar-ok" class="btn-peligro">Eliminar</button>
+      </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+
+<!-- data.js define los datos, cards.js dibuja las tarjetas.
+     Ambos deben ir ANTES de carousel.js. -->
+<script src="js/data.js"></script>
+<script src="js/cards.js"></script>
+
+<script src="js/menu.js"></script>
+<script src="js/anillo.js"></script>
+
+<!-- Actividad 4: inscripción y panel de administración.
+     api.js y validaciones.js tienen que ir antes que los otros dos. -->
+<script src="js/api.js"></script>
+<script src="js/validaciones.js"></script>
+<script src="js/inscripcion.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

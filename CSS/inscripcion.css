@@ -1,0 +1,544 @@
+/* =============================================================
+   inscripcion.css — Curso 2027 (formulario) + panel de admin
+   -------------------------------------------------------------
+   Va en un archivo aparte de dist/styles.css para que no se
+   pierda cuando se recompila Tailwind. Usa las mismas variables
+   de color del sitio (--color-red-800, --color-gray-600, etc.).
+   ============================================================= */
+@layer components {
+
+  :root {
+    --ins-gray-50: oklch(98.5% 0.002 247.839);
+    --ins-gray-200: oklch(92.8% 0.006 264.531);
+    --ins-gray-500: oklch(55.1% 0.027 264.364);
+    --ins-gray-900: oklch(21% 0.034 264.665);
+    --ins-red-400: oklch(70.4% 0.191 22.216);
+    --ins-green-50: oklch(98.2% 0.018 155.826);
+    --ins-green-200: oklch(92.5% 0.084 155.995);
+    --ins-green-800: oklch(44.8% 0.119 151.328);
+    --ins-sombra: 0 8px 30px rgb(0 0 0 / 0.08);
+
+    /* Colores fijos (no cambian con el tema) */
+    --k-white: #fff;
+    --k-gray-100: oklch(96.7% 0.003 264.542);
+    --k-gray-200: oklch(92.8% 0.006 264.531);
+    --k-gray-300: oklch(87.2% 0.01 258.338);
+    --k-gray-400: oklch(70.7% 0.022 261.325);
+    --k-gray-600: oklch(44.6% 0.03 256.802);
+    --k-gray-700: oklch(37.3% 0.034 259.733);
+    --k-gray-800: oklch(27.8% 0.033 256.848);
+    --k-gray-900: oklch(21% 0.034 264.665);
+    --k-red-100: oklch(93.6% 0.032 17.717);
+    --k-red-300: oklch(80.8% 0.114 19.571);
+    --k-red-700: oklch(50.5% 0.213 27.518);
+    --k-red-800: oklch(44.4% 0.177 26.899);
+
+    /* Panel y diálogos — modo claro */
+    --a-bg: var(--ins-gray-50);
+    --a-surface: var(--k-white);
+    --a-border: var(--ins-gray-200);
+    --a-text: oklch(27.8% 0.033 256.848);
+    --a-muted: var(--ins-gray-500);
+    --a-accent: var(--k-red-800);
+    --a-accent-soft: oklch(97.1% 0.013 17.38);
+    --a-hover: oklch(97.1% 0.013 17.38 / 0.7);
+    --a-input: var(--k-white);
+    --a-danger: oklch(57.7% 0.245 27.325);
+  }
+
+  /* Panel y diálogos — modo oscuro */
+  html[data-theme="dark"] {
+    --a-bg: var(--k-gray-900);
+    --a-surface: var(--k-gray-800);
+    --a-border: var(--k-gray-700);
+    --a-text: var(--k-gray-100);
+    --a-muted: var(--k-gray-400);
+    --a-accent: var(--k-red-300);
+    --a-accent-soft: oklch(39.6% 0.141 25.723 / 0.35);
+    --a-hover: oklch(37.3% 0.034 259.733 / 0.5);
+    --a-input: var(--k-gray-900);
+    --a-danger: var(--ins-red-400);
+  }
+
+  /* ---------- Acceso al panel (ícono en el header) ---------- */
+  .admin-access {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    transition: color 150ms;
+  }
+  .admin-access:hover { color: var(--color-red-300); }
+  .admin-access:focus-visible { outline: 2px solid var(--color-white); outline-offset: 3px; border-radius: 0.375rem; }
+
+  /* =========================================================
+     SECCIÓN CURSO
+     ========================================================= */
+  .curso { background: linear-gradient(to bottom, var(--ins-gray-50), var(--color-red-50)); }
+
+  .curso-head { max-width: 46rem; margin: 0 auto 2.5rem; text-align: center; }
+  .curso-head .section-title { margin-bottom: 1rem; }
+  .curso-lead { font-size: 1.125rem; line-height: 1.65; color: var(--color-gray-600); }
+
+  .curso-inner {
+    display: grid;
+    gap: 2rem;
+    max-width: var(--container-6xl);
+    margin-inline: auto;
+    align-items: start;
+  }
+  @media (min-width: 64rem) {
+    .curso-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; }
+  }
+
+  /* ---------- Ficha del curso (bordó, como el header) ---------- */
+  .curso-ficha {
+    --ficha-pad: 1.75rem;
+    background: var(--color-red-900);
+    color: var(--k-white);
+    border-radius: 2rem;
+    padding: 2rem var(--ficha-pad);
+    box-shadow: var(--ins-sombra);
+  }
+  @media (min-width: 64rem) {
+    .curso-ficha { --ficha-pad: 2.25rem; position: sticky; top: 6rem; }
+  }
+
+  .ficha-titulo { font-size: 1.125rem; font-weight: 700; color: var(--k-red-100); margin-bottom: 1rem; }
+
+  .ficha-lista { list-style: none; display: grid; gap: 0.875rem; margin-bottom: 2rem; }
+  .ficha-lista li { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.75rem; line-height: 1.5; }
+  .ficha-lista i { color: var(--k-red-300); text-align: center; padding-top: 0.2rem; }
+
+  /* El precio se lee como el talón de una entrada */
+  .ficha-precio {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0 calc(var(--ficha-pad) * -1) 2rem;
+    padding: 1.5rem var(--ficha-pad);
+    border-block: 2px dashed rgb(255 255 255 / 0.28);
+    background: rgb(0 0 0 / 0.14);
+  }
+  .precio-label { font-size: 0.875rem; color: var(--k-red-100); }
+  .precio-monto {
+    font-size: clamp(2.5rem, 6vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .precio-nota { font-size: 0.875rem; color: rgb(255 255 255 / 0.8); }
+
+  .ficha-pasos { list-style: none; counter-reset: paso; display: grid; gap: 0.875rem; }
+  .ficha-pasos li {
+    counter-increment: paso;
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  .ficha-pasos li::before {
+    content: counter(paso);
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    background: var(--k-white);
+    color: var(--color-red-900);
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+  .alias {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    background: rgb(255 255 255 / 0.14);
+    padding: 0.0625rem 0.375rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+  }
+
+  /* ---------- Tarjeta del formulario ---------- */
+  .form-card {
+    background: var(--color-white);
+    border-radius: 2rem;
+    padding: 1.75rem 1.5rem;
+    box-shadow: var(--ins-sombra);
+    text-align: left;
+  }
+  @media (min-width: 40rem) { .form-card { padding: 2.25rem; } }
+
+  .form-titulo { font-size: 1.5rem; font-weight: 700; color: var(--color-red-800); }
+  .form-intro { color: var(--color-gray-600); margin: 0.25rem 0 1.5rem; font-size: 0.9375rem; }
+
+  .form-grid { display: grid; gap: 1.125rem 1rem; }
+  @media (min-width: 40rem) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .campo-full { grid-column: 1 / -1; }
+  }
+  .campo { min-width: 0; }
+  .campo-ayuda { font-size: 0.8125rem; color: var(--ins-gray-500); margin-top: 0.25rem; }
+  .campo-error { font-size: 0.8125rem; color: var(--color-red-700); margin-top: 0.375rem; line-height: 1.4; }
+  .campo-error:empty { display: none; }
+  .field-input[aria-invalid="true"] { border-color: var(--color-red-600); background-color: var(--color-red-50); }
+
+  /* ---------- Zona del comprobante ---------- */
+  .archivo {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 2px dashed var(--color-gray-300);
+    border-radius: 1rem;
+    background: var(--ins-gray-50);
+    transition: border-color 150ms, background-color 150ms;
+  }
+  .archivo input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+  .archivo:hover,
+  .archivo.arrastrando { border-color: var(--color-red-500); background: var(--color-red-50); }
+  .archivo:focus-within { border-color: var(--color-red-500); box-shadow: 0 0 0 3px oklch(63.7% 0.237 25.331 / 0.25); }
+  .archivo.con-archivo { border-style: solid; border-color: var(--color-red-800); background: var(--color-white); }
+  .archivo:has(input[aria-invalid="true"]) { border-color: var(--color-red-600); background: var(--color-red-50); }
+  .archivo-icono { font-size: 1.75rem; color: var(--color-red-800); margin-bottom: 0.25rem; }
+  .archivo-texto { font-weight: 600; color: var(--color-gray-800); overflow-wrap: anywhere; }
+  .archivo-ayuda { font-size: 0.8125rem; color: var(--ins-gray-500); }
+
+  /* ---------- Resultado del envío y botón ---------- */
+  .form-estado {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid;
+    border-radius: 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .form-estado i { margin-top: 0.2rem; }
+  .estado-ok { background: var(--ins-green-50); border-color: var(--ins-green-200); color: var(--ins-green-800); }
+  .estado-error { background: var(--color-red-50); border-color: var(--color-red-100); color: var(--color-red-800); }
+
+  .btn-inscribir {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
+    padding: 0.9375rem 1.5rem;
+    font-size: 1.0625rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+  .btn:disabled { opacity: 0.65; cursor: progress; }
+  .btn:focus-visible { outline: 3px solid var(--color-red-300); outline-offset: 2px; }
+
+  /* =========================================================
+     PANEL DE ADMINISTRACIÓN
+     ========================================================= */
+  body.admin-abierto { overflow: hidden; }
+
+  .admin {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    overflow-y: auto;
+    background: var(--a-bg);
+    color: var(--a-text);
+  }
+
+  /* ---------- Barra superior (mismo bordó del header) ---------- */
+  .admin-bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--color-red-900);
+    color: var(--color-white);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.15);
+  }
+  .admin-bar-inner {
+    max-width: 80rem;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding: 0.875rem 1rem;
+  }
+  @media (min-width: 40rem) { .admin-bar-inner { padding-inline: 1.5rem; } }
+  .admin-titulo { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.025em; }
+  .admin-sub { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; font-size: 0.8125rem; color: var(--color-red-100); }
+
+  .admin-acciones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    border-radius: 0.75rem;
+    background: transparent;
+    color: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms, border-color 150ms;
+  }
+  .bar-btn:hover { background: rgb(255 255 255 / 0.12); border-color: rgb(255 255 255 / 0.55); }
+  .bar-btn:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+  .bar-btn:disabled { opacity: 0.6; cursor: progress; }
+  @media (max-width: 47.99rem) {
+    .bar-btn { padding: 0.5rem 0.625rem; }
+    .bar-btn span {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip-path: inset(50%); white-space: nowrap;
+    }
+  }
+
+  /* ---------- Contenido ---------- */
+  .admin-main { max-width: 80rem; margin-inline: auto; padding: 1.5rem 1rem 4rem; }
+  @media (min-width: 40rem) { .admin-main { padding-inline: 1.5rem; } }
+
+  .admin .field-label { color: var(--a-accent); font-size: 0.875rem; }
+  .admin .field-input { background-color: var(--a-input); color: var(--a-text); border-color: var(--a-border); }
+  .admin .field-input[aria-invalid="true"] { border-color: var(--a-danger); background-color: var(--a-accent-soft); }
+  .admin .campo-error { color: var(--a-danger); }
+  .admin button:focus-visible:not(.bar-btn),
+  .admin a:focus-visible { outline: 2px solid var(--a-accent); outline-offset: 2px; }
+
+  .admin-demo,
+  .admin-aviso {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--a-accent-soft);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .admin-demo { border: 1px dashed var(--a-accent); }
+  .admin-aviso { border: 1px solid var(--a-danger); color: var(--a-danger); font-weight: 600; }
+
+  .admin-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem; margin-bottom: 1.25rem; }
+  .filtro { flex: 1 1 18rem; }
+  .filtro-campo { flex: 0 1 12rem; }
+  .filtro-input { position: relative; }
+  .filtro-input i { position: absolute; left: 0.75rem; top: 50%; translate: 0 -50%; color: var(--a-muted); pointer-events: none; }
+  .filtro-input .field-input { padding-left: 2.25rem; }
+  .admin-toolbar .field-input { height: 2.625rem; }
+
+  .contadores { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  @media (min-width: 64rem) { .contadores { margin-left: auto; } }
+  .contador {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--a-border);
+    border-radius: 999px;
+    background: var(--a-surface);
+    font-size: 0.875rem;
+    color: var(--a-muted);
+    white-space: nowrap;
+  }
+  .contador strong { font-size: 1.125rem; color: var(--a-text); font-variant-numeric: tabular-nums; }
+  .contador-filtro { border-color: var(--a-accent); background: var(--a-accent-soft); color: var(--a-accent); }
+  .contador-filtro strong { color: var(--a-accent); }
+
+  /* ---------- Tabla ---------- */
+  .tabla-wrap {
+    overflow-x: auto;
+    background: var(--a-surface);
+    border: 1px solid var(--a-border);
+    border-radius: 1rem;
+    transition: opacity 150ms;
+  }
+  .tabla-wrap[aria-busy="true"] { opacity: 0.6; }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .tabla th {
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--a-muted);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--a-border);
+    white-space: nowrap;
+  }
+  .tabla td { padding: 0.625rem 1rem; border-bottom: 1px solid var(--a-border); vertical-align: middle; }
+  .tabla tbody tr:last-child td { border-bottom: 0; }
+  .tabla tbody tr:hover td { background: var(--a-hover); }
+  .col-apellido { font-weight: 600; }
+  .col-documento, .col-celular { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .col-email { min-width: 12rem; overflow-wrap: anywhere; }
+  .col-acciones { white-space: nowrap; text-align: right; }
+  .tabla th:last-child { text-align: right; }
+
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--a-border);
+    border-radius: 0.625rem;
+    background: transparent;
+    color: var(--a-text);
+    cursor: pointer;
+    transition: color 150ms, border-color 150ms, background-color 150ms;
+  }
+  .icon-btn + .icon-btn { margin-left: 0.375rem; }
+  .icon-btn:hover { border-color: var(--a-accent); color: var(--a-accent); }
+  .icon-btn[data-accion="eliminar"]:hover { border-color: var(--a-danger); color: var(--a-danger); background: var(--a-accent-soft); }
+
+  .link-comprobante { color: var(--a-accent); font-weight: 600; white-space: nowrap; text-decoration: underline; text-underline-offset: 2px; }
+  .archivo-nombre {
+    display: inline-block;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    color: var(--a-muted);
+  }
+  .tabla-vacia { display: grid; justify-items: center; gap: 1rem; padding: 3rem 1rem; text-align: center; color: var(--a-muted); }
+
+  /* ---------- Diálogos (login, editar, eliminar) ---------- */
+  .dlg {
+    margin: auto;
+    width: min(30rem, calc(100% - 2rem));
+    max-height: calc(100% - 2rem);
+    padding: 0;
+    border: 0;
+    border-radius: 1.5rem;
+    background: var(--a-surface, var(--color-white));
+    color: var(--a-text, var(--color-gray-800));
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
+  }
+  .dlg-ancho { width: min(42rem, calc(100% - 2rem)); }
+  .dlg::backdrop { background: oklch(21% 0.034 264.665 / 0.55); }
+  .dlg-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--a-border, var(--ins-gray-200));
+  }
+  .dlg-head h3 { font-size: 1.25rem; font-weight: 700; color: var(--a-accent, var(--color-red-800)); }
+  .dlg-cerrar {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--a-muted, var(--ins-gray-500));
+    cursor: pointer;
+  }
+  .dlg-cerrar:hover { background: var(--a-hover, var(--color-gray-100)); color: inherit; }
+  .dlg-body { display: grid; gap: 1rem; padding: 1.5rem; }
+  .dlg-texto { color: var(--a-muted, var(--color-gray-600)); line-height: 1.55; }
+  .dlg-demo { font-size: 0.8125rem; padding: 0.5rem 0.75rem; border-radius: 0.5rem; background: var(--a-accent-soft); color: var(--a-accent); }
+  .dlg-error { padding: 0 1.5rem; margin: 0 0 1rem; }
+  .dlg-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; padding: 0 1.5rem 1.5rem; }
+  .btn-dlg { padding: 0.625rem 1.25rem; }
+
+  .btn-sec {
+    padding: 0.625rem 1.125rem;
+    border: 1px solid var(--a-border, var(--color-gray-300));
+    border-radius: 0.75rem;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-sec:hover { background: var(--a-hover, var(--color-gray-100)); }
+  .btn-peligro {
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.75rem;
+    background: var(--color-red-600);
+    color: var(--color-white);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-peligro:hover { background: var(--color-red-700); }
+  .btn-peligro:disabled { opacity: 0.65; cursor: progress; }
+
+  /* ---------- Mensaje flotante ---------- */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 3;
+    translate: -50% 1rem;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    background: var(--a-text);
+    color: var(--a-bg);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+    transition: opacity 200ms, translate 200ms;
+  }
+  .toast.visible { opacity: 1; translate: -50% 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast, .archivo, .tabla-wrap { transition: none; }
+  }
+}
+
+
+/* =============================================================
+   MODO OSCURO DEL SITIO
+   -------------------------------------------------------------
+   Va FUERA de @layer a propósito: así le gana a las clases de
+   Tailwind (bg-white, text-gray-600, etc.) sin tocar el HTML.
+   El truco: dentro de <main> se redefinen las variables de color
+   de Tailwind, y todas las clases que las usan se oscurecen solas.
+   El header queda igual (bordó) en los dos modos.
+   ============================================================= */
+html[data-theme="dark"] { color-scheme: dark; }
+
+html[data-theme="dark"] body {
+  background-color: var(--k-gray-900);
+  color: var(--k-gray-100);
+}
+
+html[data-theme="dark"] main {
+  --color-white: var(--k-gray-800);      /* fondos blancos → gris oscuro */
+  --color-gray-50: var(--k-gray-900);
+  --color-gray-100: var(--k-gray-700);   /* bordes */
+  --color-gray-300: var(--k-gray-600);
+  --color-gray-600: var(--k-gray-300);   /* textos */
+  --color-gray-700: var(--k-gray-200);
+  --color-gray-800: var(--k-gray-100);
+  --color-red-50: oklch(27% 0.07 25);    /* tintes rojizos de fondo */
+  --color-red-100: oklch(36% 0.1 25);
+  --color-red-700: var(--k-red-300);     /* títulos y etiquetas */
+  --color-red-800: var(--k-red-300);
+  --ins-gray-50: var(--k-gray-900);
+  --ins-gray-200: var(--k-gray-700);
+  --ins-gray-500: var(--k-gray-400);
+  --ins-green-50: oklch(26.6% 0.065 152.934);
+  --ins-green-200: oklch(39.3% 0.095 152.535);
+  --ins-green-800: oklch(87.1% 0.15 154.449);
+  --ins-sombra: 0 8px 30px rgb(0 0 0 / 0.35);
+}
+
+/* Los botones rojos mantienen su color en los dos modos */
+html[data-theme="dark"] main .btn { background-color: var(--k-red-800); color: var(--k-white); }
+html[data-theme="dark"] main .btn:hover { background-color: var(--k-red-700); }
+
+/* Campos de formulario */
+html[data-theme="dark"] main .field-input { background-color: var(--k-gray-900); color: var(--k-gray-100); }
+
+/* Logos de las olimpíadas: fondo blanco para que se vean bien */
+html[data-theme="dark"] .card-logo img { background-color: var(--k-white); }
+html[data-theme="dark"] .card { box-shadow: 0 8px 30px rgb(0 0 0 / 0.35); }
